@@ -5,6 +5,7 @@
 #include <bluetooth/bluetooth.h>
 #include <bluetooth/hci.h>
 #include <bluetooth/hci_lib.h>
+#include <errno.h>
 
 int main() {
 
@@ -17,9 +18,14 @@ int main() {
 	char name[248] = {0};
 
 	dev_id = hci_get_route(NULL);
+	if (dev_id < 0) {
+		printf("Error %d\n", dev_id);
+		return dev_id;
+	}
+
 	sock = hci_open_dev(dev_id);
-	if (dev_id < 0 || sock < 0) {
-		puts("Error opening socket.");
+	if (sock < 0) {
+		printf("Error opening socket.%d\n", errno);
 		exit(1);
 	}
 
