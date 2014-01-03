@@ -7,3 +7,9 @@ add_executable(
 	main.c)
 
 target_link_libraries(dummy bluetooth)
+
+add_executable(
+	rfcomm-server 
+	rfcomm-server.c)
+
+target_link_libraries(rfcomm-server bluetooth)
