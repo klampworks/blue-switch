@@ -4,11 +4,21 @@
 #include <bluetooth/bluetooth.h>
 #include <bluetooth/rfcomm.h>
 
-int main()
+int main(int argc, char **argv)
 {
+	if (argc < 2) {
+		puts("Please provide an endpoint address.");
+		return 1;
+	}
+
+	if (strlen(argv[1]) != 17) {
+		puts("Please provide a valid endpoint address.");
+		return 1;
+	}
+
 	struct sockaddr_rc addr = {0};
 	int s, status;
-	char dest[18] = "??:??:??:??:??:??";
+	const char *dest = argv[1];
 
 	//ALlocate a new socket. */
 	s = socket(AF_BLUETOOTH, SOCK_STREAM, BTPROTO_RFCOMM);
