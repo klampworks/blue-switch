@@ -13,3 +13,9 @@ add_executable(
 	rfcomm-server.c)
 
 target_link_libraries(rfcomm-server bluetooth)
+
+add_executable(
+	rfcomm-client 
+	rfcomm-client.c)
+
+target_link_libraries(rfcomm-client bluetooth)
