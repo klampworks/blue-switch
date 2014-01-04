@@ -3,6 +3,7 @@
 #include <sys/socket.h>
 #include <bluetooth/bluetooth.h>
 #include <bluetooth/rfcomm.h>
+#include <errno.h>
 
 int main(int argc, char **argv)
 {
@@ -36,7 +37,7 @@ int main(int argc, char **argv)
 		/* Send data to the endpoint. */
 		status = write(s, "ahoy", 5);
 	else
-		puts("Connection failed.");
+		printf("Connection failed %s.\n", strerror(errno)), status = 0;;
 
 	if (status < 0)
 		puts("Write failed.");
